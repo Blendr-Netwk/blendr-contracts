@@ -13,54 +13,47 @@ Foundry consists of:
 
 https://book.getfoundry.sh/
 
-## Usage
+## How to deploy
 
-### Build
+### Environment Variables Setup
 
 ```shell
-$ forge build
+export PRIVATE_KEY=your_private_key_here
 ```
 
-### Test
-
 ```shell
-$ forge test
+export ETHERSCAN_API_KEY=your_etherscan_api_key
 ```
 
-### Format
-
+### Install Dependencies 
 ```shell
-$ forge fmt
+forge install OpenZeppelin/openzeppelin-contracts
 ```
 
-### Gas Snapshots
-
+### Compile Contracts
 ```shell
-$ forge snapshot
+forge build
 ```
 
-### Anvil
-
+### Deploy Contracts
 ```shell
-$ anvil
+forge script script/Deploy.s.sol:DeployScript \
+  --rpc-url https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID \
+  --broadcast \
+  --chain-id 11155111
 ```
 
-### Deploy
-
+### Encode Constructor Arguments
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+cast abi-encode "constructor(uint256)" 1000000
 ```
 
-### Cast
-
+### Verify Contract
 ```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+forge verify-contract \
+  --chain-id 11155111 \
+  --compiler-version 0.8.20 \
+  0xd0740792b3a2778628f53561bB20150b81E2540D \
+  src/Blendr_Token.sol:Blendr \
+  --constructor-args 00000000000000000000000000000000000000000000000000000000000f4240
 ```

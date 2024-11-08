@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
+// Import necessary OpenZeppelin contracts
 import {ERC20} from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import {ERC20Burnable} from "openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol";
-import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol"; 
+import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
 
-contract BLENDR is ERC20, ERC20Burnable, Ownable {
-    constructor(uint256 initialSupply) ERC20("BLENDR", "BLND") {
+contract Blendr is ERC20, ERC20Burnable, Ownable {
+    constructor(uint256 initialSupply) ERC20("BLENDR", "BLENDR") Ownable(msg.sender) {
         _mint(msg.sender, initialSupply * (10 ** decimals()));
     }
 
@@ -18,5 +19,24 @@ contract BLENDR is ERC20, ERC20Burnable, Ownable {
      */
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount * (10 ** decimals()));
+    }
+
+    /**
+     * @dev Burns tokens from the owner's account.
+     * Can only be called by the contract owner.
+     * @param amount The amount of tokens to burn (without considering decimals).
+     */
+    function burn(uint256 amount) public override onlyOwner {
+        _burn(msg.sender, amount * (10 ** decimals()));
+    }
+
+    /**
+     * @dev Burns tokens from a specified address.
+     * Can only be called by the contract owner.
+     * @param account The address from which to burn tokens.
+     * @param amount The amount of tokens to burn (without considering decimals).
+     */
+    function burnFrom(address account, uint256 amount) public override onlyOwner {
+        _burn(account, amount * (10 ** decimals()));
     }
 }
