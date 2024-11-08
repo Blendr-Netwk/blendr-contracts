@@ -4,3 +4,6 @@ out = "out"
 libs = ["lib"]
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+# forge create --rpc-url https://eth-sepolia.g.alchemy.com/v2/jC7EMC4-bcUOWT_3-B4b-AtSoMZ6cApE --private-key f8fcacfc4e44413078bcf9d5aea0df4a37b5fd4acd29232472d53a1b2f2f6250 src/Blendr_Token.sol:ERC20
+# forge verify-contract 0x780cae0ebb582686C8ac508C70214678b2d4b7f1 src/Blendr_Token.sol:ERC20 --etherscan-api-key HQRYUST3R61QE6E3H4IXTHRTAZYBAM5M5A --chain-id 11155111
+# forge verify-check --chain-id 11155111 hzkhyrdtig6dde8azqqqny8ikr3q5vbpi9cnuhfcjrzf5kmxhp --etherscan-api-key HQRYUST3R61QE6E3H4IXTHRTAZYBAM5M5A
