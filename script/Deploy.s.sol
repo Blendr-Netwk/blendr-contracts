@@ -17,7 +17,7 @@ contract DeployScript is Script {
         address tokenAddress=0xd0740792b3a2778628f53561bB20150b81E2540D;
         address serverAddress = vm.envAddress("SERVER_ADDRESS");
         RewardDistributor rewardDistributor = new RewardDistributor(serverAddress, address(tokenAddress));
-        console.log("RewardClaim deployed at:", address(rewardDistributor));
+        console.log("RewardDistributor deployed at:", address(rewardDistributor));
 
         vm.stopBroadcast();
     }
